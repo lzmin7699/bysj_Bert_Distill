@@ -127,7 +127,7 @@ def main(bert_model='bert-base-chinese', cache_dir=None,
     label_list = processor.get_labels()
     tokenizer = BertTokenizer.from_pretrained(bert_model, do_lower_case=True)
     model = BertClassification.from_pretrained(bert_model,
-                                               cache_dir=cache_dir, num_labels=len(label_list))
+    cache_dir=cache_dir, num_labels=len(label_list))
     # model = BertTextCNN.from_pretrained(bert_model,\
     # 	cache_dir=cache_dir,num_labels=len(label_list))
     model.to(device)
