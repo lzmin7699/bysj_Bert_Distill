@@ -29,8 +29,14 @@ class Teacher(object):
 
 
 if __name__ == '__main__':
+    
+    import time
+    t1 = time.time()
     teacher = Teacher()
-    print(teacher.predict('还不错！这个价位算是物有所值了！'))
+    outs = teacher.predict('还不错！这个价位算是物有所值了！')
+    t2 = time.time()
+    print('time:',t2-t1)
+    print(outs)
 
     import pickle
     from tqdm import tqdm
