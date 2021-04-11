@@ -87,15 +87,24 @@ class Model(object):
                 loss.backward()
                 opt.step()
                 losses.append(loss.item())
+           
+            import time
+            times = []
             self.model.eval()
             with torch.no_grad():
                 for i in range(0, len(x_te), self.b_size):
                     bx = Variable(LTensor(x_te[i:i + self.b_size]))
                     by = Variable(LTensor(y_te[i:i + self.b_size]))
                     bl = Variable(LTensor(l_te[i:i + self.b_size]))
+
+                    t1 = time.time()
                     _, py = torch.max(self.model(Variable(LTensor(bx)), bl)[1], 1)
+                    t2 = time.time()
+                    times.append(t2-t1)
                     accu.append((py == by).float().mean().item())
+
             print(np.mean(losses), np.mean(accu))
+            print(np.mean(times))
 
 
 if __name__ == '__main__':
