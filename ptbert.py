@@ -131,6 +131,10 @@ def main(bert_model='bert-base-chinese', cache_dir=None,
     # model = BertTextCNN.from_pretrained(bert_model,\
     # 	cache_dir=cache_dir,num_labels=len(label_list))
     model.to(device)
+    
+    pytorch_total_params = sum(p.numel() for p in model.parameters())
+    print(pytorch_total_params)
+    
     param_optimizer = list(model.named_parameters())
     no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
     optimizer_grouped_parameters = [
