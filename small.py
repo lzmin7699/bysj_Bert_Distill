@@ -69,6 +69,10 @@ class Model(object):
         if USE_CUDA: self.model = self.model.cuda()
         loss_func = nn.NLLLoss()
         opt = optim.Adam(self.model.parameters(), lr=self.lr)
+        
+        pytorch_total_params = sum(p.numel() for p in self.model.parameters())
+        print(pytorch_total_params)
+        
         for epoch in range(epochs):
             losses = []
             accu = []
