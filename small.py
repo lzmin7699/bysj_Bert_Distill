@@ -104,7 +104,7 @@ class Model(object):
                     accu.append((py == by).float().mean().item())
 
             print(np.mean(losses), np.mean(accu))
-            print(np.mean(times))
+            print('time:',np.mean(times))
 
 
 if __name__ == '__main__':
