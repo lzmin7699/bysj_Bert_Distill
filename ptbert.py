@@ -174,11 +174,17 @@ def main(bert_model='bert-base-chinese', cache_dir=None,
     eval_dataloader = DataLoader(eval_data, sampler=eval_sampler, batch_size=batch_size)
     model.eval()
     preds = []
+    import time
+    times = []
     for batch in tqdm(eval_dataloader, desc='Evaluating'):
         input_ids, input_mask, label_ids = tuple(t.to(device) for t in batch)
         with torch.no_grad():
+            t1 = time.time()
             logits = model(input_ids, input_mask, None)
+            t2 = time.time()
+            times.append(t2-t1)
             preds.append(logits.detach().cpu().numpy())
+    print('time:',np.mean(times))
     preds = np.argmax(np.vstack(preds), axis=1)
     print(compute_metrics(preds, eval_label_ids.numpy()))
     torch.save(model, 'data/cache/model')
