@@ -121,7 +121,7 @@ def compute_metrics(preds, labels):
 
 
 def main(bert_model='bert-base-chinese', cache_dir=None,
-         max_seq=128, batch_size=16, num_epochs=10, lr=2e-5):
+         max_seq=128, batch_size=16, num_epochs=15, lr=2e-5):
     processor = Processor()
     train_examples = processor.get_train_examples('data/hotel')
     label_list = processor.get_labels()
