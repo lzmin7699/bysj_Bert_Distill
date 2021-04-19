@@ -64,7 +64,7 @@ class Model(object):
         self.model = RNN(v_size, 256, 256, 2)
 
     # self.model = CNN(v_size,256,128,2)
-    def train(self, x_tr, y_tr, l_tr, x_te, y_te, l_te, epochs=15):
+    def train(self, x_tr, y_tr, l_tr, x_te, y_te, l_te, epochs=20):
         assert self.model is not None
         if USE_CUDA: self.model = self.model.cuda()
         loss_func = nn.NLLLoss()
